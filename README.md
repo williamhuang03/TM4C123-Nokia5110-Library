@@ -4,15 +4,16 @@ TM4C123 Library for the Nokia 5110 LCD (PCD8544 LCD Driver)
 Font table is 5 pixels wide, 8 pixels high. Adapted from sparkfun http://cdn.sparkfun.com/datasheets/LCD/Monochrome/Nokia_5110_Example.pde
 
 ## Functions
-// *************************************************
-// Initializes LCD
-// Uses 24 MHz as max system clock and setting SSI clock
-// to 2.67 MHz. Max SSI clock is specifed by LCD as 4 MHz
-// Formula for SSI clock is: SSIClk = System Clock / 6
-// Inputs:  None
-// Outputs: None
-// Assumes: System clock is no greater than 24 MHz
-// *************************************************
+
+
+Initializes LCD
+Uses 24 MHz as max system clock and setting SSI clock
+to 2.67 MHz. Max SSI clock is specifed by LCD as 4 MHz
+Formula for SSI clock is: SSIClk = System Clock / 6
+Inputs:  None
+Outputs: None
+Assumes: System clock is no greater than 24 MHz
+
 void Nokia5110_Init(void);
 
 // *************************************************
