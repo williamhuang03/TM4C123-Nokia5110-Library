@@ -6,7 +6,7 @@ Font table is 5 pixels wide, 8 pixels high. Adapted from sparkfun http://cdn.spa
 ## Functions
 
 
-Initializes LCD
+Initializes LCD 
 Uses 24 MHz as max system clock and setting SSI clock
 to 2.67 MHz. Max SSI clock is specifed by LCD as 4 MHz
 Formula for SSI clock is: SSIClk = System Clock / 6
