@@ -1,0 +1,8 @@
+#####################
+# keil uVsion files #
+#####################
+Listings/*
+Objects/*
+*.willi
+*.uvopt
+*.uvproj
