@@ -1,21 +1,6 @@
 #include "tm4c123gh6pm.h"
 #include "Nokia5110.h"
 
-// *****************************************************
-// Launchpad to Nokia 5110 LCD Pin Setup
-// Use SSI0 module (Port A)
-//  TI Pin  (Type)    Nokia 5110 Pin Pin #
-//  PA7     (GPIO)        RST           1
-//  PA3     (SSI0Fss)     CE            2
-//  PA6     (GPIO)        DC            3
-//  PA5     (SSI0Tx)      Din           4
-//  PA2     (SSI0Clk)     CLK           5
-//  -       ()            BL            7
-//  +3.3V   ()            VCC           6
-//  GND     ()            GND           8
-// *****************************************************
-
-
 int main(void) {
     uint32_t delay;
     uint8_t img[] = {
@@ -55,15 +40,16 @@ int main(void) {
     0x9F, 0xFF, 0xFD, 0xFE, 0xFC, 0xFC, 0xFC, 0xFF, 0xFF, 0xFF, 0xF8, 0x00, 0x00, 0x1F, 
     0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x8F, 0x8F, 0x8F, 0x8F, 0x4F, 0x3F, 0xFF, 
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE, 0xFE, 0x28, 0x18, 0x00, 0x00};
-    
+
     Nokia5110_Init();
     for(;;) {
         Nokia5110_Printf("Test print!!");
-        for(delay = 0; delay < 4000000; delay++);
+        for(delay = 0; delay < 6000000; delay++); // Delay for a bit
         Nokia5110_Clear();
-        Nokia5110_DrawFullMap(img);
-        for(delay = 0; delay < 4000000; delay++);
+        Nokia5110_DrawFullMap(img); // Display image
+        for(delay = 0; delay < 6000000; delay++); // Delay for a bitXX
         Nokia5110_Clear();
+
     }
     return 0;
 }
