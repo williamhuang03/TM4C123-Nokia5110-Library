@@ -48,6 +48,7 @@ void Nokia5110_Init(void) {
     
     LCDWrite(COMMAND, 0x20);                // Switch to basic instruction set
     LCDWrite(COMMAND, DISPLAY_MODE);        // set display control to normal mode: 0x0D for inverse
+    Nokia5110_Clear();
 }
 
 // *************************************************
