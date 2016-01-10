@@ -16,25 +16,9 @@
 // *****************************************************
 
 
-
-
 int main(void) {
-    
+
     Nokia5110_Init();
-    OutChar(0x7F);   //0x14, 0x08, 0x3e, 0x08, 0x14
-    OutChar(0x08);
-    OutChar(0x08);
-    OutChar(0x08);
-    OutChar(0x7F);
-    OutChar(0x00);
-    OutChar(0x7F);   //0x14, 0x08, 0x3e, 0x08, 0x14
-    OutChar(0x08);
-    OutChar(0x08);
-    OutChar(0x08);
-    OutChar(0x7F);
-    OutChar(0x00);
-    
-    
     
     for(;;) {
         

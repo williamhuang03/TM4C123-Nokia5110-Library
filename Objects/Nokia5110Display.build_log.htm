@@ -22,20 +22,21 @@ Dialog DLL:      TCM.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Keil_v5\Projects\TM4C123\Nokia-5110-Display\Nokia5110Display.uvproj
-Project File Date:  01/07/2016
+Project File Date:  01/09/2016
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
 compiling test.c...
-test.c(42): warning:  #111-D: statement is unreachable
+test.c(55): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+      Nokia5110_DrawFullMap(SFEFlame);
+test.c(61): warning:  #111-D: statement is unreachable
       return 0;
-test.c: 1 warning, 0 errors
-compiling Nokia5110.c...
+test.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=1012 RO-data=636 RW-data=0 ZI-data=608  
-".\Objects\Nokia5110Display.axf" - 0 Error(s), 1 Warning(s).
-Build Time Elapsed:  00:00:01
+Program Size: Code=1136 RO-data=1620 RW-data=0 ZI-data=608  
+".\Objects\Nokia5110Display.axf" - 0 Error(s), 2 Warning(s).
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

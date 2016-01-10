@@ -6,8 +6,8 @@
 // Uses 24 MHz as max system clock and setting SSI clock
 // to 2.67 MHz. Max SSI clock is specifed by LCD as 4 MHz
 // Formula for SSI clock is: SSIClk = System Clock / 6
-// Input: None
-// Output: None
+// Inputs:  None
+// Outputs: None
 // Assumes: System clock is no greater than 24 MHz
 // *************************************************
 void Nokia5110_Init(void) {
@@ -47,17 +47,20 @@ void Nokia5110_Init(void) {
     LCDWrite(COMMAND, 0x14);                // LCD bias mode 1:48: try 0x13 or 0x14
     
     LCDWrite(COMMAND, 0x20);                // Switch to basic instruction set
-    LCDWrite(COMMAND, 0x0C);                // set display control to normal mode: 0x0D for inverse
+    LCDWrite(COMMAND, DISPLAY_MODE);        // set display control to normal mode: 0x0D for inverse
 }
 
 // *************************************************
 // Sends instructions to LCD
-// Input: TYPE_OF_WRITE (DATA or COMMAND), u8int_t data
-// Output: None
+// Inputs:  type: either DATA or COMMAND instructions
+//          data: 8-bit instruction data to LCD driver
+// Outputs: None
 // *************************************************
 static void LCDWrite(TYPE_OF_WRITE type, uint8_t data) {
-    while((SSI0->SR & BSY));  // Wait for SSI0 to be not busy
-    GPIOA->DATA |= ((DC>>6) & type) << 6;
+
+    while((SSI0->SR & BSY));    // Wait for SSI0 to be not busy
+    GPIOA->DATA &= ~(DC);       // Force D/C to known low state
+    GPIOA->DATA |= type << 6;   
     SSI0->DR = data;
     while((SSI0->SR & BSY));
     
@@ -65,14 +68,64 @@ static void LCDWrite(TYPE_OF_WRITE type, uint8_t data) {
 
 // *************************************************
 // Clears LCD screen and sets cursor bck to 0,0 position
-// Input: none
-// Output: none
+// Inputs:  none
+// Outputs: none
 // *************************************************
 void Nokia5110_Clear(void) {
+    int16_t i;
+    for(i = 0; i < (MAX_X*MAX_Y/8); i++) {
+        LCDWrite(DATA, 0x00);
+    }
     
+   Nokia5110_SetCursor(0,0);
+
+}
+// *************************************************
+// Sets cursor at x_pos and y_pos
+// Max x_pos is is MAX_X - 1, max y_pos is MAX_Y - 1
+// Inputs:  x_pos: new x position on LCD
+//          y_pos: new y position on LCD
+// Outputs:
+// *************************************************
+void Nokia5110_SetCursor(uint8_t x_pos, uint8_t y_pos){
+    if(x_pos > 83 || y_pos > 5) return; // bad inputs, do nothing and return
+    LCDWrite(COMMAND, 0x80|(x_pos));    // setting bit 7 updates X-position
+    LCDWrite(COMMAND, 0x40|y_pos);      // setting bit 6 updates Y-position
 }
 
-void OutChar(uint8_t c) {
-    LCDWrite(DATA, c);
+// *************************************************
+// Sends a single ASCII character to the LCD screen
+// ASCII font based on uint8_t ASCII variable
+// Inputs:  c: ASCII character to output
+// Outputs: none
+// *************************************************
+static void OutChar(uint8_t c) {
+    uint8_t i;
+    for(i = 0; i < 5; i++) {
+        LCDWrite(DATA, ASCII[c - 0x20][i]);
+    }
 }
 
+// *************************************************
+// Write a string of ASCII characters to LCD screen
+// Inputs:  *s: pointer to string of message to send
+// Outputs: none
+// *************************************************
+void Nokia5110_Printf(uint8_t *s) {
+    while(*s) {
+        OutChar(*s++);
+    }
+}
+
+// *************************************************
+// Fills whole screen by drawing a 84x48 bitmap image
+// Inputs:  *p: pointer to bitmap image of size 504 byte
+// Outputs: none
+// *************************************************
+void Nokia5110_DrawFullMap(uint8_t *p){
+    uint16_t i;
+    Nokia5110_SetCursor(0,0);
+    for(i=0; i < (MAX_X*MAX_Y/8); i++) {
+        LCDWrite(DATA, p[i]);
+    }
+}
