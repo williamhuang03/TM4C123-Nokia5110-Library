@@ -5,43 +5,44 @@ Font table is 5 pixels wide, 8 pixels high. Adapted from sparkfun http://cdn.spa
 
 ## Functions
 
-
-Initializes LCD 
-Uses 24 MHz as max system clock and setting SSI clock
-to 2.67 MHz. Max SSI clock is specifed by LCD as 4 MHz
-Formula for SSI clock is: SSIClk = System Clock / 6
-Inputs:  None
-Outputs: None
-Assumes: System clock is no greater than 24 MHz
+// ************************************************* <br>
+// Initializes LCD <br>
+// Uses 24 MHz as max system clock and setting SSI clock <br>
+// to 2.67 MHz. Max SSI clock is specifed by LCD as 4 MHz <br>
+// Formula for SSI clock is: SSIClk = System Clock / 6 <br>
+// Inputs:  None <br>
+// Outputs: None <br>
+// Assumes: System clock is no greater than 24 MHz <br>
+// ************************************************* <br>
 
 void Nokia5110_Init(void);
 
-// *************************************************
-// Clears LCD screen and sets cursor bck to 0,0 position
-// Inputs:  none
-// Outputs: none
-// *************************************************
+// ************************************************* <br>
+// Clears LCD screen and sets cursor bck to 0,0 position <br>
+// Inputs:  none <br>
+// Outputs: none <br>
+// ************************************************* <br>
 void Nokia5110_Clear(void);
 
-// *************************************************
-// Sets cursor at x_pos and y_pos
-// Max x_pos is is MAX_X - 1, max y_pos is MAX_Y - 1
-// Inputs:  x_pos: new x position on LCD
-//          y_pos: new y position on LCD
-// Outputs: none
-// *************************************************
+// ************************************************* <br>
+// Sets cursor at x_pos and y_pos <br>
+// Max x_pos is is MAX_X - 1, max y_pos is MAX_Y - 1 <br>
+// Inputs:  x_pos: new x position on LCD <br>
+//          y_pos: new y position on LCD <br>
+// Outputs: none <br>
+// ************************************************* <br>
 void Nokia5110_SetCursor(uint8_t x_pos, uint8_t y_pos);
 
-// *************************************************
-// Write a string of ASCII characters to LCD screen
-// Inputs:  *s: pointer to string of message to send
-// Outputs: none
-// *************************************************
+// ************************************************* <br>
+// Write a string of ASCII characters to LCD screen <br>
+// Inputs:  *s: pointer to string of message to send <br>
+// Outputs: none <br>
+// ************************************************* <br>
 void Nokia5110_Printf(uint8_t *s);
 
-// *************************************************
-// Fills whole screen by drawing a 84x48 bitmap image
-// Inputs:  *p: pointer to bitmap image of size 504 byte
-// Outputs: none
-// *************************************************
+// ************************************************* <br>
+// Fills whole screen by drawing a 84x48 bitmap image <br>
+// Inputs:  *p: pointer to bitmap image of size 504 byte <br>
+// Outputs: none <br>
+// ************************************************* <br>
 void Nokia5110_DrawFullMap(uint8_t *p);
